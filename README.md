@@ -38,13 +38,13 @@ This is the reason why Perfect Dark is usually recommended to anyone who wants t
 
 Due to the way GB Studio saves, most GB Studio games are batteryless as well, though the lavender Grimace's Birthday is batteryless. GB Studio has a feature to save batteryless ROMs, but such ROMs are rarely published (because they primarily profit bootleggers).
 
-## Notes on the Games
-## TCG2
+## Notes on the Carts
+### TCG2
 This is the artemis251 translation. It saves at `$292000-$293FFF`, `$296000-$297FFF`, `$29A000-$29BFFF` and `$29E000-$29FFFF`. This is inside the defined ROM size, but the ROM actually only uses the first $284000 bytes. Before being translated, the game was only a 2 MiB ROM.
 
 Duel autosave is not written to ROM (lags would be very annoying), so autosave is gone if you turn off power during a duel. If you want to access your duel autosave to return to the state before you attacked, you must therefore press Start+Select+A+B.
 
-## Crystal
+### Crystal
 It saves at `$212000-$213FFF`, `$216000-$217FFF`, `$21A000-$29BFFF` and `$21E000-$21FFFF`. This is outside of the 2 MiB ROM.
 
 This batteryless version is based on the Rev A (Rev 1) version of the ROM.
@@ -57,7 +57,7 @@ This is v1.7. It was the only one to come without a case.
 This is my only shell to just say "GAME".
 
 ### 18-in-1 (GB HICOL MC03, MC003)
-By default, the multicart is a standard 8 MiB MBC5 cart with 32 KiB of RAM. You can just burn _Densha De Go! 2_ or _Kanji Shishuu_. (I did not burn anything yet, though.)
+By default, the multicart is a standard 8 MiB MBC5 cart with 32 KiB of RAM. You can just burn _Densha De Go! 2_ or _Kanji Shishuu_. (I did not burn anything yet, though.) This makes multicarts the by far cheapest carts to support the CGB's biggest ROM size of 8 MiB.
 
 The menu does not access its 2 KiB of RAM.
 
