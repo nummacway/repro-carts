@@ -3,7 +3,7 @@ All of these carts:
 - Come from AliExpress.
 - Ignore writes to `$4000.2-7` and are therefore restricted to 32 KiB of RAM.
 - Except for the multicart, they ignore writes to `$3000`, so they are restricted to 4 MiB of ROM.
-- Do not specifically support MBC1.
+- Except for the multicart, they do not specifically support MBC1.
 
 <div style="white-space: nowrap !important;">
   
