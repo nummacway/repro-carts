@@ -64,14 +64,21 @@ The menu does not access its 2 KiB of RAM.
 The multicart stores four values per game starting at $46FE. They end up in `A`, `$7002`, `$7001` and `$7000`.
 - A: See [here](https://gbdev.io/pandocs/Power_Up_Sequence.html#cpu-registers). This shouldn't be hardcoded. They should have pushed `A`'s initial value (`AF` to be correct) to the stack and used that. The way this is done, many DMG-compatible CGB games will either not run on DMG or CGB, depending on the value, because the menu's cartridge header sets the CGB into CGB mode. DMG-only games will not work properly on the CGB, because they keep the menu's color palette. The menu should have set a B/W palette or something like that.
 - $7002.0-1: The 8 MiB multirom bank.
-- $7002.2: Some bias, needs more research.
-- $7002.3: Unknown, probably unused.
+- $7002.2: Invoke MBC1 mode. However, it doesn't behave quite like a real MBC1:
+  - `$2000` area registers: 0 is 0.
+  - `$4000` area registers: This is interpreted complementedly (bitwise NOT). It defaults to 0, so if you map a total area of 2 MiB, it defaults to the last 512 KiB of that. Therefore, if you want to use MBC1 mode with ROMs larger than 512 KiB, you must divide your ROM into 512 KiB blocks and write them in reserve order.
+  - `$6000` area registers: Locked in advanced mode (1).
+- $7002.3: Unknown, never set.
 - $7002.4: Unknown, always set.
-- $7002.5: Use the _last_ 8 KiB of the corresponding 32 KiB of SRAM instead of four banks. So it's like writing `$03` to `$4000` and then locking this register.
+- $7002.5: Use the _last_ 8 KiB of the corresponding 32 KiB of SRAM instead of four banks. So it's like writing `$03` to `$4000` and then locking that register. If bit 6 is set, bit 6 overrides bit 5.
 - $7002.6: SRAM disable.
-- $7002.7: Lock mapper (so you cannot change multirom bank anymore). Useful for burning. Annoying when reading.
+- $7002.7: Lock mapper (so you cannot change the total mapped area anymore). Useful for burning. Annoying when reading.
 - $7001: `256 - [ROM size in bytes]/32768.`
 - $7000: `[ROM offset in multirom bank]/32768`
+
+Writing to `$4000` and `$0000` while these registers don't have any effect (due to flags written to `$7000.5-6`) will affect them as soon as they are enabled again. Things I checked about `$7002.3-4`:
+* They do not restrict the mapper, e.g. you can still map bank 0 to `$4000` even if the total mapped area is only 32768 bytes (`$7001` was set to `$ff`).
+* They do not change the mapped SRAM when used in conjuntion with bit 5.
 
 Because they are first pushed to the stack and then read from there, these four bytes are written in reverse (A is written last). Unlike e.g. EZ-Flash Jr., this cart does not reset but jump to the ROM's entry point at $100. As the first three writes already trigger the ROM switch (so the menu ROM is no longer available), the code that writes these four bytes and the stack resides in HRAM. After switching the ROM but before loading A and resetting, it configures the cart's MBC5 to bank 1 (`[$3000]=0`, `[$2000]=1`).
 
