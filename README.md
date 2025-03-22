@@ -80,24 +80,44 @@ ROMs at `floor([ROM offset]/2 MiB)` share 32 KiB of RAM. As there's 16 chunks of
 #### Contents
 Bomberman Quest has `[$014E]=$2D`, `[$0146]=$F5`. All other CGB games had `[$014F]` changed to `[$0148]-1`. DMG games (the last four) are No-Intro verified. The PacoChan patch is publicly available. The Cannon_Fodder_MULTI_GBC-CPL patch is described in a [reddit post](https://www.reddit.com/r/Gameboy/comments/6x64qd/ordered_a_bunch_of_bootleg_gbc_games_this_is_what/). The crack intro from that post is visible.
 
-1. `$00200000` Dragon Warrior 1 & 2 (USA)
-2. `$00400000` Dragon Warrior 3 (USA)
-3. `$00800000` Resident Evil (Unknown) (Proto) [PacoChan patch v1.0]
-4. `$00C00000` Cannon Fodder (Europe) (En,Fr,De,Es,It) [MULTI CGB-CPL]
-5. `$01000000` Metal Gear Solid (Europe) (En,Fr,De,Es,It)
-6. `$01400000` Legend of Zelda, The - Oracle of Ages (Europe) (En,Fr,De,Es,It)
-7. `$01600000` Legend of Zelda, The - Link's Awakening DX (USA, Europe) (Rev A)
-8. `$01800000` Legend of Zelda, The - Oracle of Seasons (Europe) (En,Fr,De,Es,It)
-9. `$01A00000` Bionic Commando - Elite Forces (USA, Australia)
-10. `$01C00000` Bomberman Quest (Europe) (En,Fr,De)
-11. `$01E00000` R-Type DX (USA, Europe)
-12. `$00100000` Survival Kids (USA)
-13. `$01F00000` Spy vs. Spy (Europe) (En,Fr,De,Es,It,Nl,Sv)
-14. `$01700000` Simpsons, The - Night of the Living Treehouse of Horror (USA, Europe)
-15. `$00060000` Adventure Island (USA, Europe)
-16. `$00080000` Adventure Island II - Aliens in Paradise (USA, Europe)
-17. `$000C0000` Contra - The Alien Wars (USA)
-18. `$000E0000` Contra (Japan) (En)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+|       |  A |7002|7001|7000| Offset      | No-Intro Name | Notes |
+| ----: | -- | -- | -- | -- | ----------- | ------------- | ----- |
+| 1.    |`11`|`90`|`C0`|`40`| `$00200000` | Dragon Warrior 1 & 2 (USA)
+| 2.    |`11`|`90`|`80`|`80`| `$00400000` | Dragon Warrior 3 (USA)
+| 3.    |`11`|`91`|`80`|`00`| `$00800000` | Resident Evil (Unknown) (Proto) | PacoChan patch v1.0
+| 4.    |`11`|`91`|`80`|`80`| `$00C00000` | Cannon Fodder (Europe) (En,Fr,De,Es,It) | MULTI CGB-CPL
+| 5.    |`11`|`92`|`80`|`00`| `$01000000` | Metal Gear Solid (Europe) (En,Fr,De,Es,It)
+| 6.    |`11`|`92`|`C0`|`80`| `$01400000` | Legend of Zelda, The - Oracle of Ages (Europe) (En,Fr,De,Es,It)
+| 7.    |`11`|`92`|`E0`|`C0`| `$01600000` | Legend of Zelda, The - Link's Awakening DX (USA, Europe) (Rev A)
+| 8.    |`11`|`93`|`C0`|`00`| `$01800000` | Legend of Zelda, The - Oracle of Seasons (Europe) (En,Fr,De,Es,It)
+| 9.    |`11`|`93`|`C0`|`40`| `$01A00000` | Bionic Commando - Elite Forces (USA, Australia)
+| 10.   |`11`|`93`|`C0`|`80`| `$01C00000` | Bomberman Quest (Europe) (En,Fr,De)
+| 11.   |`11`|`93`|`E0`|`C0`| `$01E00000` | R-Type DX (USA, Europe)
+| 12.   |`11`|`90`|`E0`|`20`| `$00100000` | Survival Kids (USA)
+| 13.   |`11`|`D3`|`E0`|`E0`| `$01F00000` | Spy vs. Spy (Europe) (En,Fr,De,Es,It,Nl,Sv)
+| 14.   |`11`|`D2`|`E0`|`E0`| `$01700000` | Simpsons, The - Night of the Living Treehouse of Horror (USA, Europe)
+| 15.   |`01`|`D0`|`FC`|`0C`| `$00060000` | Adventure Island (USA, Europe)
+| 16.   |`01`|`D0`|`F8`|`10`| `$00080000` | Adventure Island II - Aliens in Paradise (USA, Europe)
+| 17.   |`01`|`D0`|`FC`|`18`| `$000C0000` | Contra - The Alien Wars (USA)
+| 18.   |`01`|`D0`|`FC`|`1C`| `$000E0000` | Contra (Japan) (En)
 
 Surprisingly, they used the US version of Survival Kids when they chose the European versions in all other cases (when one was available). Probably they didn't know that the European release is called Stranded Kids.
 
