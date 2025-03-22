@@ -64,9 +64,10 @@ The menu does not access its 2 KiB of RAM.
 The multicart stores four values per game starting at $46FE. They end up in `A`, `$7002`, `$7001` and `$7000`.
 - A: See [here](https://gbdev.io/pandocs/Power_Up_Sequence.html#cpu-registers). This shouldn't be hardcoded. They should have pushed `A`'s initial value (`AF` to be correct) to the stack and used that. The way this is done, many DMG-compatible CGB games will either not run on DMG or CGB, depending on the value, because the menu's cartridge header sets the CGB into CGB mode. DMG-only games will not work properly on the CGB, because they keep the menu's color palette. The menu should have set a B/W palette or something like that.
 - $7002.0-1: The 8 MiB multirom bank.
-- $7002.2-3: Unknown, probably unused.
+- $7002.2: Some bias, needs more research.
+- $7002.3: Unknown, probably unused.
 - $7002.4: Unknown, always set.
-- $7002.5: Unknown, never set.
+- $7002.5: Use the _last_ 8 KiB of the corresponding 32 KiB of SRAM instead of four banks. So it's like writing `$03` to `$4000` and then locking this register.
 - $7002.6: SRAM disable.
 - $7002.7: Lock mapper (so you cannot change multirom bank anymore). Useful for burning. Annoying when reading.
 - $7001: `256 - [ROM size in bytes]/32768.`
