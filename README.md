@@ -16,7 +16,7 @@ All of these carts:
 | Hime's Quest    |   5 | 2048 |  32 | DMG Orange  | yes | SD007_BGA48_BGA48_T28 | 8192 | Micron M29W640GB6AZA6E |  32 | Cypress CY7C199L 15ZC   | 02.03.25 @ Pokegame                | 11.03.25 |`207D`| TBA | TBA | unchanged
 | Perfect Dark    |5+RBL| 4096 |   8 | DMG Grey    | yes | SD007_BGA48_BGA48_T28 | 8192 | Samsung K8D3216UBC     |  32 | Toshiba TC55257DFTI 85L | 02.03.25 @ Pokegame                | 11.03.25 |`ECA1`| TBA | TBA | unchanged
 | Pokémon Crystal |3+RTC| 2048 |  32 | CGB Crystal | no  | unknown               | 4096 | MXIC 29LV320DTTI-70G   |  32 | Hynix HY62256A          | 02.03.25 @ Pokemon Card            | 11.03.25 |`207D`|
-| Pokémon TCG Neo |   5 | 2048 |  32 | DMG BLack   | yes | SD007_BGA48_BGA48_T28 | 8192 | Micron M29W640GB6AZA6E |  32 | Cypress CY7C199L 15ZC   | 20.03.25 @ Carolina Game           | 27.03.25 |`C789`| TBA | TBA | unchanged
+| Pokémon TCG Neo |   5 | 2048 |  32 | DMG Black   | yes | SD007_BGA48_BGA48_T28 | 8192 | Micron M29W640GB6AZA6E |  32 | Cypress CY7C199L 15ZC   | 20.03.25 @ Carolina Game           | 27.03.25 |`C789`| TBA | TBA | unchanged
 | 18-in-1         |   1 |   32 |   2 | DMG Blue    | yes | SD008_512ND_4M        |32768 | MXIC 29CL256EHT27-90Q  |1024 | Samsung K6F8016U6D XF55 | 05.03.25 @ Glygame                 | 12.03.25 |`C17D`|
 
 </div>
@@ -59,7 +59,7 @@ This is v1.7. It was the only one to come without a case.
 This is my only shell to just say "GAME".
 
 ### TCG Neo
-This is the 1.32 Boy Version. It is my only Pokémon game to have a battery and the only 100% unmodified single-game cart.
+This is the non-legacy 1.32 Boy Version. It is my only Pokémon repro to have a battery and the only 100% unmodified single-game cart.
 
 The label says TCG Neo Discovery.
 
