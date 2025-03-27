@@ -143,4 +143,4 @@ Bomberman Quest has `[$014E]=$2D`, `[$0146]=$F5`. All other CGB games had `[$014
 
 Surprisingly, they used the US version of Survival Kids when they chose the European versions in all other cases (when one was available). Probably they didn't know that the European release is called Stranded Kids.
 
-Because they use the menu's palette, all four DMG games are basically unplayble.
+If you prevent the reset, the four DMG games use the menu's palette, making them basically unplayble. Preventing the reset is actually quite nice for the CGB ones because they load much faster.
