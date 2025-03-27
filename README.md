@@ -3,7 +3,8 @@ All of these carts:
 - Come from AliExpress.
 - Ignore writes to `$4000.2-7` and are therefore restricted to 32 KiB of RAM.
 - Except for the multicart, they ignore writes to `$3000`, so they are restricted to 4 MiB of ROM.
-- Except for the multicart, they do not specifically support MBC1.
+- Are MBC5. Except for the multicart, they do not aim to support MBC1.
+- Except for TCG Neo, were bought via Choice.
 
 <div style="white-space: nowrap !important;">
   
@@ -15,13 +16,14 @@ All of these carts:
 | Hime's Quest    |   5 | 2048 |  32 | DMG Orange  | yes | SD007_BGA48_BGA48_T28 | 8192 | Micron M29W640GB6AZA6E |  32 | Cypress CY7C199L 15ZC   | 02.03.25 @ Pokegame                | 11.03.25 |`207D`| TBA | TBA | unchanged
 | Perfect Dark    |5+RBL| 4096 |   8 | DMG Grey    | yes | SD007_BGA48_BGA48_T28 | 8192 | Samsung K8D3216UBC     |  32 | Toshiba TC55257DFTI 85L | 02.03.25 @ Pokegame                | 11.03.25 |`ECA1`| TBA | TBA | unchanged
 | Pokémon Crystal |3+RTC| 2048 |  32 | CGB Crystal | no  | unknown               | 4096 | MXIC 29LV320DTTI-70G   |  32 | Hynix HY62256A          | 02.03.25 @ Pokemon Card            | 11.03.25 |`207D`|
+| Pokémon TCG Neo |   5 | 2048 |  32 | DMG BLack   | yes | SD007_BGA48_BGA48_T28 | 8192 | Micron M29W640GB6AZA6E |  32 | Cypress CY7C199L 15ZC   | 20.03.25 @ Carolina Game           | 27.03.25 |`C789`| TBA | TBA | unchanged
 | 18-in-1         |   1 |   32 |   2 | DMG Blue    | yes | SD008_512ND_4M        |32768 | MXIC 29CL256EHT27-90Q  |1024 | Samsung K6F8016U6D XF55 | 05.03.25 @ Glygame                 | 12.03.25 |`C17D`|
 
 </div>
 
 - Shells tagged as CGB prevent you from turning on a DMG.
 - All sizes are given in Kibibytes. Grimace has a nominal 128 Kibiwords and 18-in-1 has a nominal 512 Kibiwords of RAM.
-- Checksum is given as individual hex bytes (aka big endian), so first two nibbles are $14E and the other two are $14F. All these checksums are invalid, but the Game Boy doesn't care.
+- Checksum is given as individual hex bytes (aka big endian), so first two nibbles are $14E and the other two are $14F. All these checksums except for TCG Neo's are invalid, but the Game Boy doesn't care.
 - "unchanged" in Dump column means that the invalid checksum is the only change compared to No-Intro.
 
 ## Battery
@@ -56,6 +58,13 @@ This is v1.7. It was the only one to come without a case.
 
 This is my only shell to just say "GAME".
 
+### TCG Neo
+This is the 1.32 Boy Version. It is my only Pokémon game to have a battery and the only 100% unmodified single-game cart.
+
+The label says TCG Neo Discovery.
+
+I did an overdump. The last 2 MiB are the last 2 MiB of Perfect Dark.
+
 ### 18-in-1 (GB HICOL MC03, MC003)
 By default, the multicart is a standard 8 MiB MBC5 cart with 32 KiB of RAM. You can just burn _Densha De Go! 2_ or _Kanji Shishuu_. (I did not burn anything yet, though.) This makes multicarts the by far cheapest carts to support the CGB's biggest ROM size of 8 MiB.
 
@@ -72,7 +81,7 @@ The multicart stores four values per game starting at $46FE. They end up in `A`,
   - `$6000-$7FFF` area registers: Unavailable. Locked in advanced mode (like you wrote `$01` there).
 - $7002.3: Unknown, never set.
 - $7002.4: Reset Game Boy.
-- $7002.5: Use the _last_ 8 KiB of the corresponding 32 KiB of SRAM instead of four banks. So it's like writing `$03` to `$4000` and then locking that register. If bit 6 is set, bit 6 overrides bit 5.
+- $7002.5: Use the _last_ 8 KiB of the corresponding 32 KiB of SRAM (see below) instead of four banks. So it's like writing `$03` to `$4000` and then locking that register. If bit 6 is set, bit 6 overrides bit 5.
 - $7002.6: SRAM disable.
 - $7002.7: Lock mapper (so you cannot change the total mapped area anymore). Useful for burning. Annoying when reading.
 - $7001: `256 - [ROM size in bytes]/32768.`
@@ -88,7 +97,7 @@ Writing to `$4000` and `$0000` while these registers don't have any effect (due 
 
 Because they are first pushed to the stack and then read from there, these four bytes are written in reverse. This means A is written last, and only if the reset is not possible (e.g. by applying tape to the third pin from the right). In the latter case, it jumps to the entry point at $100 which works fine if the conditions above are met. As in this case the first three writes already trigger the ROM switch (so the menu ROM is no longer available), the code that writes these four bytes and the stack both reside in HRAM (WRAM would have worked, too). After switching the ROM but before loading A and jumping to the entry point, it configures the cart's MBC5 to bank 1 (`[$3000]=0`, `[$2000]=1`).
 
-ROMs at the same `floor([ROM offset]/2 MiB)` share 32 KiB of RAM if RAM is enabled. As there's 16 chunks of 2 MiB in the 32 MiB ROM, there's 16 SRAM slots for a total of 512 KiB. You can have ROMs use the last 8 KiB of their chunk only, which will allow more ROMs with RAM if ones with up to 1 MiB ROM and 8 KiB ROM are in the same 2 MiB block.
+ROMs at the same `floor([ROM offset]/2 MiB)` share 32 KiB of RAM if RAM is enabled. As there's 16 chunks of 2 MiB in the 32 MiB ROM, there's 16 SRAM slots of 32 KiB each, for a total of 512 KiB. You can have ROMs use the last 8 KiB of their chunk only, which will allow more ROMs with RAM if ones with up to 1 MiB ROM and 8 KiB ROM are in the same 2 MiB block.
 
 #### Contents
 Bomberman Quest has `[$014E]=$2D`, `[$0146]=$F5`. All other CGB games had `[$014F]` changed to `[$0148]-1`. DMG games (the last four) are No-Intro verified. The PacoChan patch is publicly available. The Cannon_Fodder_MULTI_GBC-CPL patch is described in a [reddit post](https://www.reddit.com/r/Gameboy/comments/6x64qd/ordered_a_bunch_of_bootleg_gbc_games_this_is_what/). The crack intro from that post is visible.
