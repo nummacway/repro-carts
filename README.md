@@ -8,19 +8,19 @@ All of these carts:
 
 <div style="white-space: nowrap !important;">
   
-| Game            | MBC | Size | RAM | Shell       | Bat | PCB                   | ROM  | ROM IC                 | RAM | RAM IC                  | Ordered @ Ali Store                | Arrived  | CSum | Photo | CFI | Dump
+| Game            | MBC | Size | RAM | Shell       | Bat | PCB                   | ROM  | ROM Chip               | RAM | RAM Chip                | Ordered @ Ali Store                | Arrived  | CSum | Photo | CFI@ | Dump
 | --------------- | --- | ---: | --: | ----------- | --- | --------------------- | ---: | ---------------------- | --: | ----------------------- | ---------------------------------- | -------- | ---- | ---   | ---- | ----
-| Perfect Dark    |5+RBL| 4096 |   8 | DMG Grey    | yes | SD007_BGA48_BGA48_T28 | 8192 | Micron M29W640GB6AZA6E |  32 | Sony CXK58267ATM 10L    | 24.02.25 @ Pokegame                | 01.03.25 |`207D`| TBA | TBA | unchanged
-| Pokémon TCG2    |   5 | 4096 |  32 | DMG Grey    | no  | SD007_BGA48_BGA48_T28 | 8192 | Samsung K8D3216UBC     |  32 | SI IC61LV256 8TG        | 24.02.25 @ Pokegame                | 01.03.25 |`ECA1`|
-| Grimace's Bday  |   5 | 1024 |  32 |DMG Transblue| yes | SD007_BGA48_BGA48_T28 | 8192 | Micron M29W640GB6AZA6E | 256 | Winbond W26B02B 70LE    | 02.03.25 @ Treasure Game Accessory | 11.03.25 |`207D`| TBA | TBA | unchanged
-| Hime's Quest    |   5 | 2048 |  32 | DMG Orange  | yes | SD007_BGA48_BGA48_T28 | 8192 | Micron M29W640GB6AZA6E |  32 | Cypress CY7C199L 15ZC   | 02.03.25 @ Pokegame                | 11.03.25 |`207D`| TBA | TBA | unchanged
-| Perfect Dark    |5+RBL| 4096 |   8 | DMG Grey    | yes | SD007_BGA48_BGA48_T28 | 8192 | Samsung K8D3216UBC     |  32 | Toshiba TC55257DFTI 85L | 02.03.25 @ Pokegame                | 11.03.25 |`ECA1`| TBA | TBA | unchanged
-| Pokémon Crystal |3+RTC| 2048 |  32 | CGB Crystal | no  | unknown               | 4096 | MXIC 29LV320DTTI-70G   |  32 | Hynix HY62256A          | 02.03.25 @ Pokemon Card            | 11.03.25 |`207D`|
-| Pokémon TCG Neo |   5 | 2048 |  32 | DMG Black   | yes | SD007_BGA48_BGA48_T28 | 8192 | Micron M29W640GB6AZA6E |  32 | Cypress CY7C199L 15ZC   | 20.03.25 @ Carolina Game           | 27.03.25 | orig | TBA | TBA | unchanged
-| Pokémon Crystal |3+RTC| 2048 |  32 | CGB Crystal | no  | unknown               | 4096 | MXIC 29LV320DTTI-70G   |  32 | Hynix HY62256A          | 20.03.25 @ Shop1103285009          | 28.03.25 |`207D`|
-|Mario's Picross X|   1 |  256 |   8 | DMG Grey    | yes | SD007_BGA48_BGA48_T28 | 8192 | Micron M29W640GB6AZA6E | 256 | Winbond W26B02B 70LE    | 20.03.25 @ Shop1103923251          | 28.03.25 |`207D`|
-| 18-in-1         |   1 |   32 |   2 | DMG Blue    | yes | SD008_512ND_4M        |32768 | MXIC 29CL256EHT27-90Q  |1024 | Samsung K6F8016U6D XF55 | 05.03.25 @ Glygame                 | 12.03.25 |`C17D`| TBA | TBA |
-| 61-in-1         |   1 |   32 |   0 | DMG Yellow  | yes | (SD008_512ND_4M)      |32768 | (glob-top)             |2048 | NanoAmp N16T1630C1CZ 70I| 20.03.25 @ Childhood game          | 28.03.25 |`047D`| TBA | none
+| Perfect Dark    |5+RBL| 4096 |   8 | DMG Grey    | yes | SD007_BGA48_BGA48_T28 | 8192 | Micron M29W640GB6AZA6E |  32 | Sony CXK58267ATM 10L    | 24.02.25 @ Pokegame                | 01.03.25 |`207D`| TBA | `00AA` | unchanged
+| Pokémon TCG2    |   5 | 4096 |  32 | DMG Grey    | no  | SD007_BGA48_BGA48_T28 | 8192 | Samsung K8D3216UBC     |  32 | SI IC61LV256 8TG        | 24.02.25 @ Pokegame                | 01.03.25 |`ECA1`| TBA | `00AA` |
+| Grimace's Bday  |   5 | 1024 |  32 |DMG Transblue| yes | SD007_BGA48_BGA48_T28 | 8192 | Micron M29W640GB6AZA6E | 256 | Winbond W26B02B 70LE    | 02.03.25 @ Treasure Game Accessory | 11.03.25 |`207D`| TBA | `00AA` | unchanged
+| Hime's Quest    |   5 | 2048 |  32 | DMG Orange  | yes | SD007_BGA48_BGA48_T28 | 8192 | Micron M29W640GB6AZA6E |  32 | Cypress CY7C199L 15ZC   | 02.03.25 @ Pokegame                | 11.03.25 |`207D`| TBA | `00AA` | unchanged
+| Perfect Dark    |5+RBL| 4096 |   8 | DMG Grey    | yes | SD007_BGA48_BGA48_T28 | 8192 | Samsung K8D3216UBC     |  32 | Toshiba TC55257DFTI 85L | 02.03.25 @ Pokegame                | 11.03.25 |`ECA1`| TBA | `00AA` | unchanged
+| Pokémon Crystal |3+RTC| 2048 |  32 | CGB Crystal | no  | unknown               | 4096 | MXIC 29LV320DTTI-70G   |  32 | Hynix HY62256A          | 02.03.25 @ Pokemon Card            | 11.03.25 |`207D`| TBA | `00AA` |
+| Pokémon TCG Neo |   5 | 2048 |  32 | DMG Black   | yes | SD007_BGA48_BGA48_T28 | 8192 | Micron M29W640GB6AZA6E |  32 | Cypress CY7C199L 15ZC   | 20.03.25 @ Carolina Game           | 27.03.25 | orig | TBA | `00AA` | unchanged
+| Pokémon Crystal |3+RTC| 2048 |  32 | CGB Crystal | no  | unknown               | 4096 | MXIC 29LV320DTTI-70G   |  32 | Hynix HY62256A          | 20.03.25 @ Shop1103285009          | 28.03.25 |`207D`| TBA | `00AA` |
+|Mario's Picross X|   1 |  256 |   8 | DMG Grey    | yes | SD007_BGA48_BGA48_T28 | 8192 | Micron M29W640GB6AZA6E | 256 | Winbond W26B02B 70LE    | 20.03.25 @ Shop1103923251          | 28.03.25 |`207D`| TBA | `00AA` |
+| 18-in-1         |   1 |   32 |   2 | DMG Blue    | yes | SD008_512ND_4M        |32768 | MXIC 29CL256EHT27-90Q  |1024 | Samsung K6F8016U6D XF55 | 05.03.25 @ Glygame                 | 12.03.25 |`C17D`| TBA | `00AA` |
+| 61-in-1         |   1 |   32 |   0 | DMG Yellow  | yes | (SD008_512ND_4M)      |32768 | (glob-top)             |2048 | NanoAmp N16T1630C1CZ 70I| 20.03.25 @ Childhood game          | 28.03.25 |`047D`| TBA | `0555` |
 
 </div>
 
@@ -28,6 +28,7 @@ All of these carts:
 - All sizes are given in Kibibytes. Grimace has a nominal 128 Kibiwords and 18-in-1 has a nominal 512 Kibiwords of RAM.
 - Checksum is given as individual hex bytes (aka big endian), so first two nibbles are $14E and the other two are $14F. All these checksums except for TCG Neo's are invalid, but the Game Boy doesn't care.
 - "unchanged" in Dump column means that the invalid checksum is the only change compared to No-Intro.
+- CFI@ is the hexadecimal address to write `$98` to so you can read the CFI query data. You exit CFI by writing `$F0` to any ROM address.
 
 ## Battery
 If a repro cart has a battery (that is not empty), you can simply put on any ROM. Pokémon ROMs will also work in Pokémon Stadium.
@@ -92,7 +93,7 @@ Thus multicart's menu stores four values per game. They end up in `A`, `$7002`, 
 - $7001: `256 - [ROM size in bytes]/32768.` (AND mask shl 15)
 - $7000: `[ROM offset in multirom bank]/32768` (OR mask shl 15)
 
-The use of masks requires the games' offsets to be divisable by their own size.
+The use of masks requires a game's offset to be divisible by its own size.
 
 Writing to `$4000` and `$0000` while these registers don't have any effect (due to flags written to `$7000.5-6`) will affect them as soon as they are enabled again. Things I checked about `$7002.3`:
 * It does not restrict the mapper, e.g. you can still map bank 0 to `$4000` even if the total mapped area is only 32768 bytes (`$7001` was set to `$ff`).
@@ -101,6 +102,7 @@ Writing to `$4000` and `$0000` while these registers don't have any effect (due 
 * It does not invoke MBC2, even with bit 1 or bit 5 set.
 * It does not invoke MBC1M.
 * It does not invoke MBC3.
+* It does not prevent MBC3+TIMER carts from corrupting SRAM (writes to SRAM bank `$08` and above aren't discarded - they are redirected to the given bank modulo the number of banks (4 or 1) just like always).
 
 Because they are first pushed to the stack and then read from there, these four bytes are written in reverse. This means A is written last, and only if the reset is not possible (e.g. by applying tape to the third pin from the right). In the latter case, it jumps to the entry point at $100 which works fine if the conditions above are met. As the first three writes already trigger the ROM switch (so the menu ROM is no longer available), the code that writes these four bytes and the stack both reside in HRAM (WRAM would have worked, too). After switching the ROM but before loading A and jumping to the entry point, it configures the cart's MBC5 to bank 1 (`[$2000]=1`, `[$3000]=0`). Because MBC1 is not MBC5 and 0 is 0 in MBC1 mode, this can trigger the aforementioned bug in MBC1 mode, expecially in games that cannot soft-reset (Select+Start+A+B).
 
@@ -132,21 +134,25 @@ Bomberman Quest has `[$014E]=$2D`, `[$0146]=$F5`. All other CGB games had `[$014
 | `17 SUPER CONTRA1` |`01`|`D0`|`FC`|`18`| `$000C0000` | Contra - The Alien Wars (USA)
 | `18 SUPER CONTRA2` |`01`|`D0`|`FC`|`1C`| `$000E0000` | Contra (Japan) (En)
 
-There is a 19th, inaccessible item, which only has a name (`19 ARMY MEN 3   `) but no description or register data.
+There is a 19th, inaccessible item, which only has a name (`19 ARMY MEN 3   `) but no description or register data. Said game is the 19th game in the 19-in-1. 352 KiB go unused. They are located in a continuous area between the menu and Adventure Island.
 
 Surprisingly, they used the US version of Survival Kids when they chose the European versions in all other cases (when one was available). Probably they didn't know that the European release is called Stranded Kids.
 
 If you prevent the reset, the four DMG games use the menu's palette when running on a CGB, making them basically unplayble. Preventing the reset is actually quite nice for the CGB ones because they load much faster.
 
 #### 61-in-1 (GB HICOL MC06, MC006)
-This cart is really bad. It has all the things you don't want: There are many bitflips (around 1 in 10000 bytes) where a bit is cleared but should be set (the opposite does not happen), and I cannot even reprogram it. I also don't get CFI.
+This cart is really bad. There are many bitflips (around 1 in 10000 bytes) where a bit is _often_ (but not always) cleared but should be set (the opposite does not happen). Although I used a Game Boy for dumping, I did not encounter issues in-game.
 
-The four bytes of data are starting at `$47FF`. The menu doesn't have no RAM, but has 0 KiB of RAM. There are 11 items per page.
+You can retrieve CFI by writing `$98` to `$0555` instead of the usual `$00AA`. CFI doesn't really contain useful info and it's only `$80` bytes long.
+
+Entering ROM areas beyond 16 MiB and reading from the same addresses again and again returns slightly different data on each read (more different than the aforementioned random bitflips), but you can recognize many similarities. They persist over power and bank cycles.
+
+The four bytes of data are starting at `$47FF`. The menu doesn't have no RAM, but has 0 KiB of RAM. BGB complains that this makes no sense. There are 11 items per page.
 
 
-While the 108-in-1 is densely packed with ROMs for 0 free space, the 61-in-1 has three empty areas in this ROM due to bad placement and two other things they could have done better:
+While the 108-in-1 is densely packed with ROMs for 0 free space, the 61-in-1 has three empty areas (all `$FF` - with no bit errors) due to bad placement and two other things they could have done better:
 1. The menu is 32 KiB, but the first game in ROM is 64 KiB. Therefore, 32 KiB are wasted after the menu.
-2. Spud's Adventure is a 64 KiB game that has its own 512 KiB block.
-3. The last 256 KiB go unsued.
-4. There is a duplicate for Belmont's Revenge.
+2. Spud's Adventure is a 64 KiB game that has its own 512 KiB block. Makes you think if a different game in its place originally.
+3. The last 256 KiB go unused.
+4. There is a duplicate of Belmont's Revenge right after the first one. The menu links to the first one.
 5. This ROM seems to be at least 32 MiB as you get random data when read from there. The data stays the same over 8 MiB block and bank switches.
