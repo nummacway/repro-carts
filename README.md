@@ -143,8 +143,11 @@ Surprisingly, they used the US version of Survival Kids when they chose the Euro
 
 If you prevent the reset, the four DMG games use the menu's palette when running on a CGB, making them basically unplayble. Preventing the reset is actually quite nice for the CGB ones because they load much faster.
 
+#### 20-in-1 (GB HICOL MC01, MC001)
+19 is claimed by sellers to be Kirby's Dream Land, but it is actually Castlevania 2 (Belmont's Revenge).
+
 #### 61-in-1 (GB HICOL MC06, MC006)
-This cart is really bad. There are many bitflips (around 1 in 10000 bytes) where a bit is _often_ (but not always) cleared but should be set (the opposite does not happen). Although I used a Game Boy for dumping, I did not encounter issues in-game.
+This cart is really bad. There are many bitflips (around 1 in 10000 bytes) where a bit is _often_ (but not on every read) cleared but should be set (the opposite does not happen). Although I used a Game Boy for dumping, I did not encounter issues in-game.
 
 You can retrieve CFI by writing `$98` to `$0555` instead of the usual `$00AA`. CFI doesn't really contain useful info and it's only `$80` bytes long.
 
