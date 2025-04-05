@@ -19,8 +19,11 @@ All of these carts:
 | Pokémon TCG Neo |   5 | 2048 |  32 | DMG Black   | yes | SD007_BGA48_BGA48_T28 | 8192 | Micron M29W640GB6AZA6E |  32 | Cypress CY7C199L 15ZC   | 20.03.25 @ Carolina Game           | 27.03.25 | orig | TBA | `00AA` | unchanged
 | Pokémon Crystal |3+RTC| 2048 |  32 | CGB Crystal | no  | unknown               | 4096 | MXIC 29LV320DTTI-70G   |  32 | Hynix HY62256A          | 20.03.25 @ Shop1103285009          | 28.03.25 |`207D`| TBA | `00AA` |
 |Mario's Picross X|   1 |  256 |   8 | DMG Grey    | yes | SD007_BGA48_BGA48_T28 | 8192 | Micron M29W640GB6AZA6E | 256 | Winbond W26B02B 70LE    | 20.03.25 @ Shop1103923251          | 28.03.25 |`207D`| TBA | `00AA` |
-| 18-in-1         |   1 |   32 |   2 | DMG Blue    | yes | SD008_512ND_4M        |32768 | MXIC 29CL256EHT27-90Q  |1024 | Samsung K6F8016U6D XF55 | 05.03.25 @ Glygame                 | 12.03.25 |`C17D`| TBA | `00AA` |
-| 61-in-1         |   1 |   32 |   0 | DMG Yellow  | yes | (SD008_512ND_4M)      |32768 | (glob-top)             |2048 | NanoAmp N16T1630C1CZ 70I| 20.03.25 @ Childhood game          | 28.03.25 |`047D`| TBA | `0555` |
+| 18-in-1         |   1 |   32 |   2 | DMG Blue    | yes | SD008_512ND_4M        |32768 | MXIC 29GL256EHT27-90Q  |1024 | Samsung K6F8016U6D XF55 | 05.03.25 @ Glygame                 | 12.03.25 |`C17D`| TBA | `00AA` |
+| 19-in-1         |   1 |   32 |   2 | DMG Red     | yes | (SD008_512ND_4M)      |32768 | MXIC 29GL256EHT27-90Q  |1024 | Cypress CY62158CV25LL   | 27.03.25 @ AntiqueGame             | 03.04.25 |`C17D`| TBA | `00AA` |
+| 20-in-1         |   1 |   32 |   2 | DMG Green   | yes | (SD008_512ND_4M)      |32768?| (glob-top)             |2048 | NanoAmp N16T1630C1CZ 70I| 27.03.25 @ Carolina Game           | 03.04.25 |`027D`| TBA | TBA |
+| 61-in-1         |   1 |   32 |   0 | DMG Yellow  | yes | (SD008_512ND_4M)      |16384?| (glob-top)             |2048 | NanoAmp N16T1630C1CZ 70I| 20.03.25 @ Childhood game          | 28.03.25 |`047D`| TBA | `0555` |
+| 108-in-1        |   1 |   32 |   2 |DMG Transblue| yes | (SD008_512ND_4M)      |32768?| (glob-top)             |2048 | NanoAmp N16T1630C1CZ 70I| 27.03.25 @ Carolina Game           | 03.04.25 |`027D`| TBA | TBA |
 
 </div>
 
@@ -31,16 +34,16 @@ All of these carts:
 - CFI@ is the hexadecimal address to write `$98` to so you can read the CFI query data. You exit CFI by writing `$F0` to any ROM address.
 
 ## Battery
-If a repro cart has a battery (that is not empty), you can simply put on any ROM. Pokémon ROMs will also work in Pokémon Stadium.
+If a repro cart has a battery (that is not empty), you can simply put on any ROM that does not require more RAM than the cart supports. Pokémon ROMs will also work in Pokémon Stadium in this case. Note that second-generation Pokémon games use a real-time clock (RTC) which is technically five special RAM banks ($08 to $0C). This means that if your cart has less than 128 KiB of acessible RAM, these games will corrupt their own save games (box 8 to be precise).
 
 Batteryless games save to ROM. This is fine, as all ROM ICs are designed to withstand 100,000 writes. However, you're supposed to write at 3.3V, but most carts lack a level shifter from 5V. You can recognize batteryless ROM images by the music stopping for around 1 second when they write back your save to ROM.
 
 Because of the 64 KiB erase sector size of the above ROM ICs (ROM sectors must be erased before being written), batteryless saving is only possible in games with 64 KiB of unused space at an address divisable by 64 KiB (called an aligned 64 KiB sector). As explained earlier, no single-game repro cart supports 8 MiB of ROM, so it's safe to assume that all carts shipping with a 4 MiB image will have a battery if the ROM image does not have an aligned 64 KiB sector of free space. Here's a list of commonly-available 4 MiB games on AliExpress:
-- Games without a free 64 KiB sector (safe to assume that these battery-save): Dragon Warrior III, Grandia - Parallel Trippers, Perfect Dark, Resident Evil (if second prototype)
-- Games with free 64 KiB sector in-between: Daikatana (if US prototype; JP is only 1 MiB), Donkey Kong Country, Resident Evil (if first prototype), Tomb Raider, Tomb Raider - Curse of the Sword
+- Games without a free 64 KiB sector (safe to assume that these battery-save): Dragon Warrior III, Grandia - Parallel Trippers, Perfect Dark, Resident Evil (if second prototype; this includes PacoChan's patch)
+- Games with at least one aligned free 64 KiB sector in-between: Daikatana (if US prototype; JP is only 1 MiB), Donkey Kong Country, Resident Evil (if first prototype), Tomb Raider, Tomb Raider - Curse of the Sword
 - Games that leave at least 64 KiB free space at the end: Cannon Fodder, Ghostly Labyrinth 2, Metal Gear Solid (EU; US is only 2 MiB), Pokémon TCG2 (fan translation; JP is only 2 MiB; see below for more info), Shantae (known to not have a battery)
 
-This is the reason why Perfect Dark is usually recommended to anyone who wants to get a cart with standard SRAM (meaning you do not need a modified ROM to be able to save).
+This is the reason why Perfect Dark is usually recommended to anyone who wants to get a cart with standard battery-backed SRAM (meaning you do not need a modified ROM to be able to save).
 
 Due to the way GB Studio saves, most GB Studio games are batteryless as well, though the lavender Grimace's Birthday is batteryless. GB Studio has a feature to save batteryless ROMs, but such ROMs are rarely published (because they primarily profit bootleggers).
 
@@ -60,7 +63,7 @@ This is my only shell to say "GAME BOY COLOR" and the only one with the original
 ### Grimace's Birthday
 This is v1.7. It was the only one to come without a case.
 
-This is my only shell to just say "GAME".
+This is my only shell to just say "GAME". Even the 108-in-1, which has the same color, say Nintendo GAME BOY.
 
 ### TCG Neo
 This is the non-legacy 1.32 Boy Version. It is my only Pokémon repro to have a battery and the only 100% unmodified single-game cart.
@@ -81,13 +84,13 @@ Thus multicart's menu stores four values per game. They end up in `A`, `$7002`, 
   - Using a hardcoded value of `$11` on the DMG will have many "GB Compatible" games try to use color palettes _instead_ of b/w palettes. Additionally, they will likely try to bank VRAM, mainly for background attributes. For example, Pokémon Yellow goes basically unaffected because its map is single-palette, but Pokémon Gold will glitch the map when you load into the map from a building or battle. Opening the menu fixes this temporarily and map parts loaded while walking will be fine from the start. Additionally, the DMG will be able to load CGB-exclusives, but will quickly bug out due to the massive lack of features.
   - Using a hardcoded value of `$01` on the CGB will make CGB-exclusives display a lockout screen. All other games will assume they're on a DMG. But because the menu's header requests CGB mode, the CGB will expect the game to write color palettes which it likely won't. This is guaranteed to happen with DMG games no matter what value is provided here. In all of these cases (except for the CGB-exclusives), the game will use the multicart menu's color palette. The menu should have set a B/W palette or something like that.
 - $7002.0-1: The 8 MiB multirom bank (OR mask shl 23)
-- $7002.2: Invoke MBC1 mode. This mode is not used. However, it doesn't behave quite like a real MBC1:
+- $7002.2: Invoke MBC1 mode. This mode is not used by default menus. However, it doesn't behave quite like a real MBC1:
   - `$2000-$3FFF` area registers: 0 is 0. This is the most important bug here.
   - `$4000-$5FFF` area registers: For the ROM, this is interpreted complementedly (bitwise NOT). It defaults to 0, so if you map a total area of 2 MiB, it defaults to the last 512 KiB of that. Therefore, if you want to use MBC1 mode with ROMs larger than 512 KiB, you must divide your ROM into 512 KiB blocks and write them in reserve order. Writes (over the full area) affect ROM (if at least 1 MiB) and RAM (if not locked with bit 5).
   - `$6000-$7FFF` area registers: Unavailable. Locked in advanced mode (like you wrote `$01` there).
 - $7002.3: Unknown, never set.
 - $7002.4: Reset Game Boy.
-- $7002.5: Use the _last_ 8 KiB of the corresponding 32 KiB of SRAM (see below) instead of four banks. So it's like writing `$03` to `$4000` and then locking that register. If bit 6 is set, bit 6 overrides bit 5.
+- $7002.5: Use the _last_ 8 KiB of the corresponding 32 KiB of SRAM (see below) instead of four banks. So it's like writing `$03` to `$4000` and then locking that register. If bit 6 is set, bit 6 overrides bit 5. Only the latter is used by default menus, not the actual 8 KiB mode. The 
 - $7002.6: SRAM disable.
 - $7002.7: Lock mapper (so you cannot change the total mapped area anymore). Useful for burning. Annoying when reading.
 - $7001: `256 - [ROM size in bytes]/32768.` (AND mask shl 15)
@@ -101,7 +104,7 @@ Writing to `$4000` and `$0000` while these registers don't have any effect (due 
 * It does not allow for more then 32 KiB of RAM.
 * It does not invoke MBC2, even with bit 1 or bit 5 set.
 * It does not invoke MBC1M.
-* It does not invoke MBC3.
+* It does not invoke MBC3. MBC3 ROMs 512 KiB or smaller are basically covered by MBC1 mode because it's so bugged.
 * It does not prevent MBC3+TIMER carts from corrupting SRAM (writes to SRAM bank `$08` and above aren't discarded - they are redirected to the given bank modulo the number of banks (4 or 1) just like always).
 
 Because they are first pushed to the stack and then read from there, these four bytes are written in reverse. This means A is written last, and only if the reset is not possible (e.g. by applying tape to the third pin from the right). In the latter case, it jumps to the entry point at $100 which works fine if the conditions above are met. As the first three writes already trigger the ROM switch (so the menu ROM is no longer available), the code that writes these four bytes and the stack both reside in HRAM (WRAM would have worked, too). After switching the ROM but before loading A and jumping to the entry point, it configures the cart's MBC5 to bank 1 (`[$2000]=1`, `[$3000]=0`). Because MBC1 is not MBC5 and 0 is 0 in MBC1 mode, this can trigger the aforementioned bug in MBC1 mode, expecially in games that cannot soft-reset (Select+Start+A+B).
@@ -113,7 +116,7 @@ The four bytes of data are starting at `$46FE`. The menu does not access its 2 K
 
 Bomberman Quest has `[$014E]=$2D`, `[$0146]=$F5`. All other CGB games had `[$014F]` changed to `[$0148]-1`. DMG games (the last four) are No-Intro verified. The PacoChan patch is publicly available. The Cannon_Fodder_MULTI_GBC-CPL patch is described in a [reddit post](https://www.reddit.com/r/Gameboy/comments/6x64qd/ordered_a_bunch_of_bootleg_gbc_games_this_is_what/). The crack intro from that post is present.
 
-| Menu Item          |  A |7002|7001|7000| Offset      | No-Intro Name | Notes |
+| Menu Item          |  A | 7k2| 7k1| 7k0| Offset      | No-Intro Name | Notes |
 | ------------------ | -- | -- | -- | -- | ----------- | ------------- | ----- |
 | `1 WARRIOR 1+2   ` |`11`|`90`|`C0`|`40`| `$00200000` | Dragon Warrior 1 & 2 (USA)
 | `2 WARRIOR 3     ` |`11`|`90`|`80`|`80`| `$00400000` | Dragon Warrior 3 (USA)
@@ -134,7 +137,7 @@ Bomberman Quest has `[$014E]=$2D`, `[$0146]=$F5`. All other CGB games had `[$014
 | `17 SUPER CONTRA1` |`01`|`D0`|`FC`|`18`| `$000C0000` | Contra - The Alien Wars (USA)
 | `18 SUPER CONTRA2` |`01`|`D0`|`FC`|`1C`| `$000E0000` | Contra (Japan) (En)
 
-There is a 19th, inaccessible item, which only has a name (`19 ARMY MEN 3   `) but no description or register data. Said game is the 19th game in the 19-in-1. 352 KiB go unused. They are located in a continuous area between the menu and Adventure Island.
+There is a 19th, inaccessible item, which only has a name (`19 ARMY MEN 3   `) but no description or register data. Said game is the 19th game in the 19-in-1. 352 KiB of this cart go unused. They are located in a continuous area between the menu and Adventure Island.
 
 Surprisingly, they used the US version of Survival Kids when they chose the European versions in all other cases (when one was available). Probably they didn't know that the European release is called Stranded Kids.
 
