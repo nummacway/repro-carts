@@ -144,7 +144,7 @@ Surprisingly, they used the US version of Survival Kids when they chose the Euro
 If you prevent the reset, the four DMG games use the menu's palette when running on a CGB, making them basically unplayble. Preventing the reset is actually quite nice for the CGB ones because they load much faster.
 
 #### 20-in-1 (GB HICOL MC01, MC001)
-19 is claimed by sellers to be Kirby's Dream Land, but it is actually Castlevania 2 (Belmont's Revenge).
+19 is claimed by sellers to be Kirby's Dream Land, but it is actually Castlevania 2 (Belmont's Revenge). Spud's Adventure's `$7001` claims it was 512 KiB in size, when it is only 64 KiB.
 
 #### 61-in-1 (GB HICOL MC06, MC006)
 This cart is really bad. There are many bitflips (around 1 in 10000 bytes) where a bit is _often_ (but not on every read) cleared but should be set (the opposite does not happen). Although I used a Game Boy for dumping, I did not encounter issues in-game.
@@ -158,7 +158,7 @@ The four bytes of data are starting at `$47FF`. The menu doesn't have no RAM, bu
 
 While the 108-in-1 is densely packed with ROMs for 0 free space, the 61-in-1 has three empty areas (all `$FF` - with no bit errors) due to bad placement and two other things they could have done better:
 1. The menu is 32 KiB, but the first game in ROM is 64 KiB. Therefore, 32 KiB are wasted after the menu.
-2. Spud's Adventure is a 64 KiB game that has its own 512 KiB block. Makes you think if a different game in its place originally.
+2. Spud's Adventure is a 64 KiB game that has its own 512 KiB block, probably because its `$7001` value also claims it was 512 KiB. Makes you think if a different game was in its place originally. It is also the only 64 KiB game on this cart to not be featured in the 108-in-1.
 3. The last 256 KiB go unused.
 4. There is a duplicate of Belmont's Revenge right after the first one. The menu links to the first one.
 5. This ROM seems to be at least 32 MiB as you get random data when read from there. The data stays the same over 8 MiB block and bank switches.
