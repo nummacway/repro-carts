@@ -79,12 +79,12 @@ This is a hack by Ross Atkin (who probably goes by the name Tidus Renegade). I c
 ### "GB HICOL" Multicarts
 By default, the multicart is a standard 8 MiB MBC5 cart with 32 KiB of RAM. If the cart is writable, you could just burn _Densha De Go! 2_ or _Kanji Shishuu_. (I did not burn anything yet, though.) This makes multicarts the by far cheapest carts to support the CGB's biggest ROM size of 8 MiB.
 
-Thus multicart's menu stores four values per game. They end up in `A`, `$7002`, `$7001` and `$7000`.
+These multicarts' menus store four values per game. They end up in `A`, `$7002`, `$7001` and `$7000`.
 - A: See [here](https://gbdev.io/pandocs/Power_Up_Sequence.html#cpu-registers). Only loaded if the cart cannot reset the Game Boy. The rest of this and the next two indented bullets apply to the cart being unable to reset: Even if the cart cannot reset, A shouldn't be hardcoded. They should have pushed `A`'s initial value (`AF` to be correct) as defined by the boot ROM to the stack and used that. Either way, there's no good resetless solution that allows the CGB to play both, CGB and DMG games from the same cart, nor will you be able to make a cart with both CGB-exclusives and CGB-enhanced games where a DMG will be able to play the CGB-enhanced ones and still have the CGB enhancements when the same cart is used in a CGB.
   - Using a hardcoded value of `$11` on the DMG will have many "GB Compatible" games try to use color palettes _instead_ of b/w palettes. Additionally, they will likely try to bank VRAM, mainly for background attributes. For example, Pokémon Yellow goes basically unaffected because its map is single-palette, but Pokémon Gold will glitch the map when you load into the map from a building or battle. Opening the menu fixes this temporarily and map parts loaded while walking will be fine from the start. Additionally, the DMG will be able to load CGB-exclusives, but will quickly bug out due to the massive lack of features.
   - Using a hardcoded value of `$01` on the CGB will make CGB-exclusives display a lockout screen. All other games will assume they're on a DMG. But because the menu's header requests CGB mode, the CGB will expect the game to write color palettes which it likely won't. This is guaranteed to happen with DMG games no matter what value is provided here. In all of these cases (except for the CGB-exclusives), the game will use the multicart menu's color palette. The menu should have set a B/W palette or something like that.
 - $7002.0-1: The 8 MiB multirom bank (OR mask shl 23)
-- $7002.2: Invoke MBC1 mode. This mode is not used by default menus. However, it doesn't behave quite like a real MBC1:
+- $7002.2: Invoke MBC1 mode. This mode is not used by default menus. MBC1 mode doesn't quite behave like a real MBC1:
   - `$2000-$3FFF` area registers: 0 is 0. This is the most important bug here.
   - `$4000-$5FFF` area registers: For the ROM, this is interpreted complementedly (bitwise NOT). It defaults to 0, so if you map a total area of 2 MiB, it defaults to the last 512 KiB of that. Therefore, if you want to use MBC1 mode with ROMs larger than 512 KiB, you must divide your ROM into 512 KiB blocks and write them in reserve order. Writes (over the full area) affect ROM (if at least 1 MiB) and RAM (if not locked with bit 5).
   - `$6000-$7FFF` area registers: Unavailable. Locked in advanced mode (like you wrote `$01` there).
@@ -104,7 +104,7 @@ Writing to `$4000` and `$0000` while these registers don't have any effect (due 
 * It does not allow for more then 32 KiB of RAM.
 * It does not invoke MBC2, even with bit 1 or bit 5 set.
 * It does not invoke MBC1M.
-* It does not invoke MBC3. MBC3 ROMs 512 KiB or smaller are basically covered by MBC1 mode because it's so bugged.
+* It does not invoke MBC3. MBC3 ROMs 512 KiB or smaller might slightly benefit from MBC1 mode because the `$3000` registers belong to the `$2000` register.
 * It does not prevent MBC3+TIMER carts from corrupting SRAM (writes to SRAM bank `$08` and above aren't discarded - they are redirected to the given bank modulo the number of banks (4 or 1) just like always).
 
 Because they are first pushed to the stack and then read from there, these four bytes are written in reverse. This means A is written last, and only if the reset is not possible (e.g. by applying tape to the third pin from the right). In the latter case, it jumps to the entry point at $100 which works fine if the conditions above are met. As the first three writes already trigger the ROM switch (so the menu ROM is no longer available), the code that writes these four bytes and the stack both reside in HRAM (WRAM would have worked, too). After switching the ROM but before loading A and jumping to the entry point, it configures the cart's MBC5 to bank 1 (`[$2000]=1`, `[$3000]=0`). Because MBC1 is not MBC5 and 0 is 0 in MBC1 mode, this can trigger the aforementioned bug in MBC1 mode, expecially in games that cannot soft-reset (Select+Start+A+B).
@@ -114,14 +114,14 @@ ROMs at the same `floor([ROM offset]/2 MiB)` share 32 KiB of RAM if RAM is enabl
 #### 18-in-1 (GB HICOL MC03, MC003)
 The four bytes of data are starting at `$46FE`. The menu does not access its 2 KiB of RAM. There are 6 items per page.
 
-Bomberman Quest has `[$014E]=$2D`, `[$0146]=$F5`. All other CGB games had `[$014F]` changed to `[$0148]-1`. DMG games (the last four) are No-Intro verified. The PacoChan patch is publicly available. The Cannon_Fodder_MULTI_GBC-CPL patch is described in a [reddit post](https://www.reddit.com/r/Gameboy/comments/6x64qd/ordered_a_bunch_of_bootleg_gbc_games_this_is_what/). The crack intro from that post is present.
+Bomberman Quest has `[$014E]=$2D`, `[$0146]=$F5`. All other CGB games had `[$014F]` changed to `[$0148]-1`. DMG games (the last four) are No-Intro verified. The Resident Evil is using the PacoChan v1.0 patch which is publicly available. Cannon Fodder has a Cracktro described in a [reddit post](https://www.reddit.com/r/Gameboy/comments/6x64qd/ordered_a_bunch_of_bootleg_gbc_games_this_is_what/).
 
-| Menu Item          |  A | 7k2| 7k1| 7k0| Offset      | No-Intro Name | Notes |
-| ------------------ | -- | -- | -- | -- | ----------- | ------------- | ----- |
+| Menu Item          |  A | 7k2| 7k1| 7k0| Offset      | No-Intro Name |
+| ------------------ | -- | -- | -- | -- | ----------- | ------------- |
 | `1 WARRIOR 1+2   ` |`11`|`90`|`C0`|`40`| `$00200000` | Dragon Warrior 1 & 2 (USA)
 | `2 WARRIOR 3     ` |`11`|`90`|`80`|`80`| `$00400000` | Dragon Warrior 3 (USA)
-| `3 RESDEN EVIL   ` |`11`|`91`|`80`|`00`| `$00800000` | Resident Evil (Unknown) (Proto) | PacoChan patch v1.0
-| `4 CANNON FODDER ` |`11`|`91`|`80`|`80`| `$00C00000` | Cannon Fodder (Europe) (En,Fr,De,Es,It) | MULTI CGB-CPL
+| `3 RESDEN EVIL   ` |`11`|`91`|`80`|`00`| `$00800000` | Resident Evil (Unknown) (Proto)
+| `4 CANNON FODDER ` |`11`|`91`|`80`|`80`| `$00C00000` | Cannon Fodder (Europe) (En,Fr,De,Es,It)
 | `5 METAL GEAR SOL` |`11`|`92`|`80`|`00`| `$01000000` | Metal Gear Solid (Europe) (En,Fr,De,Es,It)
 | `6 ZELDA AGES    ` |`11`|`92`|`C0`|`80`| `$01400000` | Legend of Zelda, The - Oracle of Ages (Europe) (En,Fr,De,Es,It)
 | `7 ZELDA AWAKENIN` |`11`|`92`|`E0`|`C0`| `$01600000` | Legend of Zelda, The - Link's Awakening DX (USA, Europe) (Rev A)
