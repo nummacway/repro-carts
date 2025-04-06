@@ -90,7 +90,7 @@ These multicarts' menus store four values per game. They end up in `A`, `$7002`,
   - `$6000-$7FFF` area registers: Unavailable. Locked in advanced mode (like you wrote `$01` there).
 - $7002.3: Unknown, never set.
 - $7002.4: Reset Game Boy.
-- $7002.5: Use the _last_ 8 KiB of the corresponding 32 KiB of SRAM (see below) instead of four banks. So it's like writing `$03` to `$4000` and then locking that register. If bit 6 is set, bit 6 overrides bit 5. Only the latter is used by default menus, not the actual 8 KiB mode. The 
+- $7002.5: Use the _last_ 8 KiB of the corresponding 32 KiB of SRAM (see below) instead of four banks. So it's like writing `$03` to `$4000` and then locking that register. If bit 6 is set, bit 6 overrides bit 5. The latter constellation is used by the 61-in-1 and 108-in-1 menu. The actual 8 KiB is only found in the 61-in-1 menu where it is used for Super Mario Land 2 and 3. It is not used to increase the number of RAM-enabled games, even though Super Mario Bros. Deluxe would qualify, but there are only 7 games with a save feature on that cart anyway.
 - $7002.6: SRAM disable.
 - $7002.7: Lock mapper (so you cannot change the total mapped area anymore). Useful for burning. Annoying when reading.
 - $7001: `256 - [ROM size in bytes]/32768.` (AND mask shl 15)
