@@ -161,4 +161,19 @@ While the 108-in-1 is densely packed with ROMs for 0 free space, the 61-in-1 has
 2. Spud's Adventure is a 64 KiB game that has its own 512 KiB block, probably because its `$7001` value also claims it was 512 KiB. Makes you think if a different game was in its place originally. It is also the only 64 KiB game on this cart to not be featured in the 108-in-1.
 3. The last 256 KiB go unused.
 4. There is a duplicate of Belmont's Revenge right after the first one. The menu links to the first one.
-5. This ROM seems to be at least 32 MiB as you get random data when read from there. The data stays the same over 8 MiB block and bank switches.
+5. You get random data when read from beyond 16 MiB, but it bears a lot of similarities.
+
+#### 108-in-1
+My copy has four bit flips that persisted over multiple reads. Again, these bits are cleared when it should be set.
+|  # | Game                            | L.Offset |   G.Offset | Good | Bad  |
+| -: | ------------------------------- | -------: | ---------: | ---- | ---- |
+| 10 | Mega Man Xtreme (USA, Europe)   | `$3720A` | `$123720A` |`0x6E`|`0x66`|
+| 11 | Mega Man Xtreme 2 (USA, Europe) | `$938E9` | `$14938E9` |`0x2E`|`0x2C`|
+| 65 | F-15 Strike Eagle (USA, Europe) | `$19C89` | `$1319C89` |`0x0F`|`0x0D`|
+|103 | Balloon Kid (USA, Europe)       |  `$7522` | `$1547522` |`0xAF`|`0xAE`|
+
+Two other bit flips on the first dump went away on the second dump:
+|  # | Game                            | L.Offset |   G.Offset | Good | Bad  |
+| -: | ------------------------------- | -------: | ---------: | ---- | ---- |
+| 74 | Casper (USA) [DMG]              |  `$CB97` | `$172CB97` |`0xC5`|`0x85`|
+|105 | Tom & Jerry (USA, Europe) [DMG] | `$1FE8F` | `$159FE8F` |`0xF3`|`0x73`|
