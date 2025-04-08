@@ -21,7 +21,7 @@ All of these carts:
 |Mario's Picross X|   1 |  256 |   8 | DMG Grey    | yes | SD007_BGA48_BGA48_T28 | 8192 | Micron M29W640GB6AZA6E | 256 | Winbond W26B02B 70LE    | 20.03.25 @ Shop1103923251          | 28.03.25 |`207D`| TBA | `00AA` |
 | 18-in-1         |   1 |   32 |   2 | DMG Blue    | yes | SD008_512ND_4M        |32768 | MXIC 29GL256EHT27-90Q  |1024 | Samsung K6F8016U6D XF55 | 05.03.25 @ Glygame                 | 12.03.25 |`C17D`| TBA | `00AA` |
 | 19-in-1         |   1 |   32 |   2 | DMG Red     | yes | (SD008_512ND_4M)      |32768 | MXIC 29GL256EHT27-90Q  |1024 | Cypress CY62158CV25LL   | 27.03.25 @ AntiqueGame             | 03.04.25 |`C17D`| TBA | `00AA` |
-| 20-in-1         |   1 |   32 |   2 | DMG Green   | yes | (SD008_512ND_4M)      |32768?| (glob-top)             |2048 | NanoAmp N16T1630C1CZ 70I| 27.03.25 @ Carolina Game           | 03.04.25 |`027D`| TBA | TBA |
+| 20-in-1         |   1 |   32 |   2 | DMG Green   | yes | (SD008_512ND_4M)      |32768?| (glob-top)             |2048 | NanoAmp N16T1630C1CZ 70I| 27.03.25 @ AntiqueGame             | 03.04.25 |`027D`| TBA | `0555` |
 | 61-in-1         |   1 |   32 |   0 | DMG Yellow  | yes | (SD008_512ND_4M)      |16384?| (glob-top)             |2048 | NanoAmp N16T1630C1CZ 70I| 20.03.25 @ Childhood game          | 28.03.25 |`047D`| TBA | `0555` |
 | 108-in-1        |   1 |   32 |   2 |DMG Transblue| yes | (SD008_512ND_4M)      |32768?| (glob-top)             |2048 | NanoAmp N16T1630C1CZ 70I| 27.03.25 @ Carolina Game           | 03.04.25 |`027D`| TBA | TBA |
 
