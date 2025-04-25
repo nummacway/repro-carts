@@ -77,7 +77,7 @@ I did an overdump. The last 2 MiB are the last 2 MiB of Perfect Dark.
 This is a hack by Ross Atkin (who probably goes by the name Tidus Renegade). I couldn't find it anywhere. Unlike other hacks, this is still an MBC1.
 
 ### "GB HICOL" Multicarts
-By default, the multicart is a standard 8 MiB MBC5 cart with 32 KiB of RAM. If the cart is writable, you could just burn _Densha De Go! 2_ or _Kanji Shishuu_. (I did not burn anything yet, though.) This makes multicarts the by far cheapest carts to support the CGB's biggest ROM size of 8 MiB.
+By default, the multicart is a standard 8 MiB MBC5 cart with 32 KiB of RAM. If the cart is writable, you could just burn _Densha De Go! 2_ (confirmed to work) or _Kanji Shishuu_. This makes multicarts the by far cheapest carts to support the CGB's biggest ROM size of 8 MiB.
 
 These multicarts' menus store four values per game. They end up in `A`, `$7002`, `$7001` and `$7000`.
 - A: See [here](https://gbdev.io/pandocs/Power_Up_Sequence.html#cpu-registers). Only loaded if the cart cannot reset the Game Boy. The rest of this and the next two indented bullets apply to the cart being unable to reset: Even if the cart cannot reset, A shouldn't be hardcoded. They should have pushed `A`'s initial value (`AF` to be correct) as defined by the boot ROM to the stack and used that. Either way, there's no good resetless solution that allows the CGB to play both, CGB and DMG games from the same cart, nor will you be able to make a cart with both CGB-exclusives and CGB-enhanced games where a DMG will be able to play the CGB-enhanced ones and still have the CGB enhancements when the same cart is used in a CGB.
