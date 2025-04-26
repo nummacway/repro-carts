@@ -86,7 +86,7 @@ These multicarts' menus store four values per game. They end up in `A`, `$7002`,
 - `$7002.0-1`: The 8 MiB multirom bank (OR mask shl 23)
 - `$7002.2`: Invoke MBC1 mode. This mode is not used by default menus. MBC1 mode doesn't quite behave like a real MBC1:
   - `$2000-$3FFF` area register: 0 is 0. This is the most important bug here.
-  - `$3000-$3FFF` area register: Effectively unavailable if `$7002.5` is clear (even if it is useless because `$7002.6` is set as well). In other words: MBC1 mode cannot improve 32 KiB RAM games. I consider this a bug.
+  - `$3000-$3FFF` area register: Effectively unavailable if `$7002.5` is clear (even if it is useless because `$7002.6` is set and overrides it). In other words: MBC1 mode cannot improve 32 KiB RAM games (only two MBC5-incompatible MBC1 games with 32 KiB of RAM are known to exist, _Fushigi no Dungeon - Fuurai no Shiren GB - Tsukikage Mura no Kaibutsu (Japan)_ and _Nihon Daihyou Team France de Ganbare! - J.League Supporter Soccer (Japan)_). I consider this a bug.
   - `$4000-$5FFF` area register: For the ROM, this is interpreted complementedly (bitwise NOT). It defaults to 0, so if you map a total area of 2 MiB, it defaults to the last 512 KiB of that. Therefore, if you want to use MBC1 mode with ROMs larger than 512 KiB, you must divide your ROM into 512 KiB blocks and write them in reserve order. Writes (over the full area) affect ROM (if at least 1 MiB) and RAM (if not locked with bit 5). If `$7001` is set to less than `$C0` (which makes no sense for MBC1; only checked `$00` though), it is instead treated as if it was `$C0` in conjunction with this register. This means that even if you map 8 MiB, writing `$03` into this register will give you the first 512 KiB of that, not the fourth-to-last from a 8 MiB or (taking `$3000` into account) 4 MiB area.
   - `$6000-$7FFF` area register: Unavailable. Locked in advanced mode (like you wrote `$01` there).
 - `$7002.3`: Unknown, never set.
@@ -111,6 +111,23 @@ Writing to `$4000` and `$0000` while these registers don't have any effect (due 
 Because they are first pushed to the stack and then read from there, these four bytes are written in reverse. This means A is written last, and only if the reset is not possible (e.g. by applying tape to the third pin from the right). In the latter case, it jumps to the entry point at $100 which works fine if the conditions above are met. As the first three writes already trigger the ROM switch (so the menu ROM is no longer available), the code that writes these four bytes and the stack both reside in HRAM (WRAM would have worked, too). After switching the ROM but before loading A and jumping to the entry point, it configures the cart's MBC5 to bank 1 (`[$2000]=1`, `[$3000]=0`). Because MBC1 is not MBC5 and 0 is 0 in MBC1 mode, this can trigger the aforementioned bug in MBC1 mode, expecially in games that cannot soft-reset (Select+Start+A+B).
 
 ROMs at the same `floor([ROM offset]/2 MiB)` share 32 KiB of RAM if RAM is enabled. As there's 16 chunks of 2 MiB in the 32 MiB ROM, there's 16 SRAM slots of 32 KiB each, for a total of 512 KiB. You can have ROMs use the last 8 KiB of their chunk only, which will allow more ROMs with RAM if ones with up to 1 MiB ROM and 8 KiB ROM are in the same 2 MiB block.
+
+**[Excourse]** Some may ask: Why can MBC1 games larger than 512 KiB even work as MBC5? Accessing areas beyond 512 KiB is completely different!
+
+Here's an example from _Super Black Bass Pocket 2 (Japan)_, and say we're loading bank `A = $32` and the old bank was between `$00` and `$1f`:
+```asm
+; This method can be found at $a79.
+; This method maintains a history of the last 9 bank switches in HRAM (addresses F8-AE-AF-B0-B1-B2-B3-B4-B5, ordered newest to oldest) presumably for debug purposes, which is updates before the bank is switched.
+; The following excerpt starts at $a9d:
+LD [$2000], A ; maps ROM bank $12 on MBC1 because bits 5-7 are ignored; maps ROM bank $32 on MBC5
+AND $60       ; sets A = $20; note that $60 is used although this is a 1 MiB ROM whose last bank is $3f
+RRCA          ; sets A = $10
+SWAP A        ; sets A = $01
+LD [$4000], A ; maps ROM bank $32 on MBC1; maps RAM bank 0 on MBC5 because all bits are ignored (too little RAM to be banked)
+```
+This means this game relies on the fact that MBC1 discards `$2000.5-7` and respects `$4000`. However, if a game with 0 to 8 KiB RAM of RAM is run as MBC5, the opposite is the case which works out by conincidence.
+
+Because physical mappers do not care about the header, note that Pokémon Gin/Kin Spaceworld demos and Zelta DX betas do not belong into this category because they are _not_ actual MBC1 games.
 
 #### 18-in-1 (GB HICOL MC03, MC003)
 The four bytes of data are starting at `$46FE`. The menu does not access its 2 KiB of RAM. There are 6 items per page.
