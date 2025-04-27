@@ -127,7 +127,7 @@ Here's an example from _Super Black Bass Pocket 2 (Japan)_, and say we're loadin
 ; This method maintains a history of the last 9 bank switches in HRAM (addresses F8-AE-AF-B0-B1-B2-B3-B4-B5, ordered newest to oldest) presumably for debug purposes, which is updates before the bank is switched.
 ; The following excerpt starts at $a9d:
 LD [$2000], A ; maps ROM bank $12 on MBC1 because bits 5-7 are ignored; maps ROM bank $32 on MBC5
-AND $60       ; sets A = $20; note that $60 is used although this is a 1 MiB ROM whose last bank is $3f
+AND $60       ; sets A = $20; note that $60 is used although this is a 1 MiB ROM whose last bank is $3f; also note that the entire operation is useless because mappers ignore bits that don't apply to them
 RRCA          ; sets A = $10
 SWAP A        ; sets A = $01
 LD [$4000], A ; maps ROM bank $32 on MBC1; maps RAM bank 0 on MBC5 because all bits are ignored (too little RAM to be banked)
