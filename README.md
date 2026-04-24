@@ -94,10 +94,11 @@ These multicarts' menus store four values per game. They end up in `A`, `$7002`,
 - `$7002.3`: Unknown, never set.
 - `$7002.4`: Reset Game Boy.
 - `$7002.5`: Does two very different things if set:
-  1. Use the _last_ 8 KiB of the corresponding 32 KiB of SRAM (see below) instead of four banks. So it's like writing `$03` to `$4000` and then locking that register. If bit 5 and 6 are both set, RAM will be unavailable. The latter constellation is used by the 61-in-1 and 108-in-1 menu, while the others only set bit 6 if they don't want RAM (see bullet 2 for the possible reason). The actual 8 KiB RAM mode is only found in the 61-in-1 menu where it is used for Super Mario Land 2 and 3. It is not used to increase the number of RAM-enabled games, even though Super Mario Bros. Deluxe would qualify to share its RAM with one of these two, but there are only 7 games with a save feature on that cart anyway.
-  2. Invoke MBC3 mode (if your game is 512 KiB or smaller, MBC1 and MBC3 are exactly the same), expanding the `$2000-$2fff` register to `$2000-$3fff`. Bugs:
-     - Bank 0 is bank 0. This is the most important bug here. There are over hundred gams that still profit from this mode.
-     - Supports 4 MiB of ROM. This is invalid but won't hurt anyone. It has the advantage that you can use this for MBC5 games with 8 KiB RAM and up to 4 MiB of ROM to make the mapper ignore writes to `$4000-$5fff` registers completely (unless `$7002.2` is set), so your games cannot bank RAM should they try to.
+  1. This paragraph (number 1) only applies if bit 0 is clear (thanks to Lesserkuma for reporting this constraint): Use the _last_ 8 KiB of the corresponding 32 KiB of SRAM (see below) instead of four banks. So it's like writing `$03` to `$4000` and then locking that register. If bit 5 and 6 are both set, RAM will be unavailable. The latter constellation is used by the 61-in-1 and 108-in-1 menu, while the others only set bit 6 if they don't want RAM (see bullet 2 for the possible reason). The actual 8 KiB RAM mode is only found in the 61-in-1 menu where it is used for Super Mario Land 2 and 3. It is not used to increase the number of RAM-enabled games, even though Super Mario Bros. Deluxe would qualify to share its RAM with one of these two, but there are only 7 games with a save feature on that cart anyway.
+  2. Invoke MBC30 mode (MBC30 is identical to MBC3 if your game has a maximum of 2 MiB ROM and 32 KiB of RAM; MBC30 and MBC3 are identical to MBC1 if your game has a maximum of 512 KiB ROM), expanding the `$2000-$2fff` register to `$2000-$3fff`.
+     - Bug 1: Bank 0 is bank 0. This is the most important bug here. There are over hundred gams that still profit from this mode.
+     - Bug 2: If bit 0 is clear, SML2 will crash. (Thanks to Lesserkuma for reporting this.)
+     - Because it emulates MBC30, it supports 4 MiB of ROM. No official game was ever released that uses MBC30's full ROM mapping potential, only RAM. It has the advantage that you can use this for MBC5 games with 8 KiB RAM and up to 4 MiB of ROM to make the mapper ignore writes to `$4000-$5fff` registers completely (unless `$7002.2` is set), so your games cannot bank RAM should they try to.
   - If `$7002.5` is clear, memory at `$4000-$7fff` will be in MBC5 mode. This means that if `$7002.2` is set but `$7002.5` is clear, memory at `$0000-$3fff` _and_ `$a000-$bfff` will both be in MBC1 Advanced Mode (e.g. RAM will be determined by exactly two bits of the `$4000-$5fff` register and ROM will be determined by the same up to two bits (which doesn't even make sense with 32 KiB of RAM), meaning you can map up to 4 different ROM banks there, namely 0, 32, 64 and 96), but `$4000-$7fff` will be in MBC5 mode (meaning you can map up to 512 different banks there).
   This also means that you cannot use MBC3/MBC1 with 32 KiB of RAM. Only two MBC5-incompatible MBC1 games with 32 KiB of RAM are known to exist, _Fushigi no Dungeon - Fuurai no Shiren GB - Tsukikage Mura no Kaibutsu (Japan)_ and _Nihon Daihyou Team France de Ganbare! - J.League Supporter Soccer (Japan)_). I believe this locking of the RAM register might have originally be intended for `$7002.2` where it actually made sense.
 - `$7002.6`: SRAM disable.
@@ -111,7 +112,7 @@ Writing to `$4000` and `$0000` while these registers don't have any effect (due 
 * It does not restrict the mapper, e.g. you can still map bank 0 to `$4000` even if the total mapped area is only 32768 bytes (`$7001` was set to `$ff`).
 * It does not change the mapped SRAM when used in conjuntion with bit 5.
 * It does not allow for more then 32 KiB of RAM.
-* It does not invoke MBC2, even with bit 1 or bit 5 set.
+* It does not invoke MBC2, even with bit 2 or bit 5 set.
 * It does not invoke MBC1M. It doesn't really matter since you can very easily convert MBC1M to MBC1, though the result will consume double the ROM - or you can just split the multicart into separate ROMs and use them individually since you already have multicart.
 * It does not prevent MBC3+TIMER carts from corrupting SRAM (writes to SRAM bank `$08` and above aren't discarded - they are redirected to the given bank modulo the number of banks (4 or 1) just like always).
 
@@ -120,6 +121,8 @@ Because they are first pushed to the stack and then read from there, these four 
 ROMs at the same `floor([ROM offset]/2 MiB)` share 32 KiB of RAM if RAM is enabled. As there's 16 chunks of 2 MiB in the 32 MiB ROM, there's 16 SRAM slots of 32 KiB each, for a total of 512 KiB. You can have ROMs use the last 8 KiB of their chunk only, which will allow more ROMs with RAM if ones with up to 1 MiB ROM and 8 KiB ROM are in the same 2 MiB block.
 
 **[Excourse]** Some may ask: Why can MBC1 games larger than 512 KiB even work as MBC5? Accessing areas beyond 512 KiB is completely different!
+
+*Edit:* What is described in this excourse _only_ works because emulators (which I used to check MBC5 compatibility) can emulate MBC5 _with 8 KiB of RAM_. The GB HICOL can only emulate MBC5 with 0 or 32 KiB of RAM. Unless a game only accesses RAM while ROM Bank modulo 32 _always_ has the same value, no game should work on GB HICOL when its mapper is MBC5 mode (bit 5 cleared).
 
 Here's an example from _Super Black Bass Pocket 2 (Japan)_, and say we're loading bank `A = $32` and the old bank was between `$00` and `$1f`:
 ```asm
